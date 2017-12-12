@@ -25,6 +25,18 @@ public class Solution {
         cache.put(n-2, nMinus2);
         cache.put(n-3, nMinus3);
         
+
+	/*
+	 * no. of ways till N = no. of ways till N after i took (1) first step +
+	 * 			no. of ways teill N after i took (2) first step + 
+	 * 			no. of ways till N after i took (3) first step.
+	 *
+	 * 			(each recurses till we hit basecase of 1,2,3)A
+	 */
+
+	//iterative fill array till 1,2,3 ... n also an approach.
+	//one more optimization is to circularly maintain the array of 3 as we build up the value till N (cos we dont need n-4, n-5,.... n-n values... )
+	
         return (nMinus1 + nMinus2 + nMinus3);
         
     }
