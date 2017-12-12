@@ -47,6 +47,8 @@ public class Solution {
                 break;
             }
         }
+//iterating through keyset of map would have been shorter than iterating through words
+//because words repeated, not the keyset.
         
         return result;
     }
