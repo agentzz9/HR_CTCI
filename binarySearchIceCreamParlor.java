@@ -22,6 +22,10 @@ class IceCream implements Comparable<IceCream>{
 }
 public class Solution {
    
+    //Array class has its own binarySerach tooo dont forget.... also optimization for search region possible... (1,3,4,5,6,7,9)
+    // if 3,7 = 10; 
+    // 3 we have.... no need to search on 1,3. invoke on 4..9 the search for 7
+    
     public static IceCream binarySearch(int first, int last, List<IceCream> iceCreams, int search, int avoidSelf) {
       
         if(first > last) return null;
