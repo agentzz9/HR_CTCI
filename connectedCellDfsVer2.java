@@ -10,9 +10,15 @@ public class Solution {
     static int[] dC = {+1, +1, +0, -1, -1, -1, +0, +1};
     
     static boolean[][] visited;//  = new boolean[r][c];
+
+    //alternate : 
+    //to save space on visited. we could just clear up matrix of the 1s instead. becasue we anyway dont need to revisit those cells...
+   // hence no visited grid needed in this case... 
+   // thanks gayle...
     
-    public static int getRegionCount(int currRow, int currCol, int[][] matrix, int r, int c, boolean[][] visited, int count){
-        
+    public static int getRegionCount(int currRow, int currCol, int[][] matrix, int r, int c, boolean[][] visited){
+		       
+        int count = 0;
        visited[currRow][currCol] = true;
        count++;
         
@@ -23,7 +29,7 @@ public class Solution {
         
             if(nextR < r && nextR >= 0 && nextC < c && nextC >= 0 && matrix[nextR][nextC] == 1 && !visited[nextR][nextC]){
                 visited[nextR][nextC] = true;
-                count += getRegionCount(nextR, nextC, matrix, r, c, visited, 0); 
+                count += getRegionCount(nextR, nextC, matrix, r, c, visited); 
             }
             
         }
@@ -38,7 +44,7 @@ public class Solution {
         for(int i=0; i<r; i++){
             for(int j=0; j<c; j++){
                 if(matrix[i][j]==1 && !visited[i][j]){
-                    count = getRegionCount(i, j, matrix, r, c, visited, 0);         
+                    count = getRegionCount(i, j, matrix, r, c, visited);         
                     maxCount = (count>maxCount)?count:maxCount;
                     count = 0;
                 }
