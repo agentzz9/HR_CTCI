@@ -4,9 +4,7 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 public class Solution {
-
-
-	/*
+/*
 	 * useful hint......
 	 *
 	 * I'll give you guys a hint. You need a min-heap and a max-heap.
@@ -21,22 +19,21 @@ So you pretty much have the middle values of the array, therefore can calculate 
     static class maxPQComparator implements Comparator<Integer>{
         @Override
         public int compare(Integer a, Integer b){
-            return ((Integer)(-1*(int)a)).compareTo((Integer)(-1*(int)b));
+            return -1*a.compareTo(b);
         }
     }
 
     public static PriorityQueue<Integer> leftMaxPQ; 
     public static PriorityQueue<Integer> rightMinPQ;
-    public static double prevMedian;
+    
     public static double getRunningMedian(int[] arr,int elementCount, int arrSize, int arrCurrentIndex){
-        
         
         double result = 0.0;
         
-        if(arr[arrCurrentIndex] < prevMedian){
+        if( leftMaxPQ.size() == 0 || arr[arrCurrentIndex] < leftMaxPQ.peek() ){
             leftMaxPQ.add(arr[arrCurrentIndex]);	
         }else{
-             rightMinPQ.add(arr[arrCurrentIndex]);
+            rightMinPQ.add(arr[arrCurrentIndex]);
         }
        
         if(Math.abs(leftMaxPQ.size() - rightMinPQ.size()) == 2){
@@ -49,10 +46,7 @@ So you pretty much have the middle values of the array, therefore can calculate 
         }else result = (leftMaxPQ.size() > rightMinPQ.size()) ? 
                         (double)leftMaxPQ.peek() : (double)rightMinPQ.peek();
         
-        prevMedian = result;
-
         return result;
-
 
     }
     public static void main(String[] args) {
@@ -63,7 +57,7 @@ So you pretty much have the middle values of the array, therefore can calculate 
         
          leftMaxPQ = new PriorityQueue<Integer>(n, new maxPQComparator());
          rightMinPQ = new PriorityQueue<Integer>(n);
-        prevMedian = 0.0;
+        
         for(int a_i=0; a_i < n; a_i++){
             a[a_i] = in.nextInt();
             count++;
@@ -73,7 +67,6 @@ So you pretty much have the middle values of the array, therefore can calculate 
 
     }
 }
-
 
 
 
